@@ -37,6 +37,10 @@
       font-weight: 500;
       color: #111827;
     }
+
+    .error {
+      color: #dc2626;
+    }
   </style>
 </head>
 <body>
@@ -48,12 +52,23 @@
   <script>
     const niche = "Travelling"; // Set according to site niche
     fetch("https://contact-gb21y79ql-riot020s-projects.vercel.app/api/contact?niche=" + niche)
-      .then(res => res.json())
+      .then(res => {
+        if (!res.ok) {
+          throw new Error(`HTTP error! status: ${res.status}`);
+        }
+        return res.json();
+      })
       .then(data => {
+        if (data.error) {
+          throw new Error(data.error);
+        }
         document.getElementById("contact-number").textContent = data.number;
       })
-      .catch(() => {
-        document.getElementById("contact-number").textContent = "Unavailable";
+      .catch(error => {
+        console.error('Fetch error:', error);
+        const contactElement = document.getElementById("contact-number");
+        contactElement.textContent = "Service unavailable";
+        contactElement.classList.add("error");
       });
   </script>
 </body>
