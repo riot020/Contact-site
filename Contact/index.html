@@ -47,7 +47,7 @@
 
   <script>
     const niche = "Travelling"; // Set according to site niche
-    fetch("https://your-vercel-api.vercel.app/api/contact?niche=" + niche)
+    fetch("https://contact-api-lilac.vercel.app/api/contact?niche=" + niche)
       .then(res => res.json())
       .then(data => {
         document.getElementById("contact-number").textContent = data.number;
