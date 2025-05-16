@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Contact Info - Travelling</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600&display=swap" rel="stylesheet" />
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Inter', sans-serif;
+      background: #f4f8fb;
+      color: #333;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+    }
+
+    .card {
+      background: #ffffff;
+      padding: 2rem 3rem;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+      text-align: center;
+    }
+
+    .title {
+      font-size: 1.5rem;
+      font-weight: 600;
+      margin-bottom: 1rem;
+      color: #1d4ed8;
+    }
+
+    #contact-number {
+      font-size: 1.25rem;
+      font-weight: 500;
+      color: #111827;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <div class="title">Get in Touch with Us</div>
+    <div id="contact-number">Loading...</div>
+  </div>
+
+  <script>
+    const niche = "Travelling"; // Set according to site niche
+    fetch("https://your-vercel-api.vercel.app/api/contact?niche=" + niche)
+      .then(res => res.json())
+      .then(data => {
+        document.getElementById("contact-number").textContent = data.number;
+      })
+      .catch(() => {
+        document.getElementById("contact-number").textContent = "Unavailable";
+      });
+  </script>
+</body>
+</html>
